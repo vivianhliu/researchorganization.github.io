@@ -1,0 +1,2238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TAMS Research Org</title>
+  <meta name="description" content="Helping students find mentors, build projects, and compete with confidence." />
+
+  <style>
+    :root{
+      --ro-blue:#173f9f;
+      --ro-blue-2:#1e40af;
+      --ro-gold:#eab308;
+      --ro-text:#0f172a;
+      --ro-muted:#60738f;
+      --ro-line:#cfd8e3;
+      --ro-bg:#eef3f8;
+      --ro-card:#ffffff;
+      --ro-soft:#f8fbff;
+      --ro-shadow:0 10px 28px rgba(15,23,42,.07);
+      --ro-radius:22px;
+      --ro-radius2:16px;
+      --ro-max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:var(--ro-bg);
+      color:var(--ro-text);
+    }
+    a{color:inherit}
+    img{max-width:100%;display:block}
+
+    /* ===== Top Nav ===== */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(15,23,42,.08);
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
+    }
+    .navwrap{
+      max-width:var(--ro-max);
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:900; letter-spacing:-.02em;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .brand .logo{
+      width:44px; height:44px;
+      border-radius:14px;
+      background:var(--ro-blue);
+      display:grid; place-items:center;
+      color:#fff;
+      box-shadow: 0 12px 22px rgba(23,63,159,.22);
+      flex:0 0 44px;
+    }
+    .brand .name{
+      font-size:18px;
+    }
+    .brand .name span{ color:var(--ro-blue); }
+
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+    .navlinks a{
+      text-decoration:none;
+      color:#51657f;
+      font-weight:700;
+      font-size:13px;
+      padding:10px 10px;
+      border-radius:999px;
+      transition:.15s ease;
+    }
+    .navlinks a:hover{ background:#f3f6fb; color:var(--ro-text); }
+    .navlinks a.active{
+      background:#e9effa;
+      color:var(--ro-blue);
+    }
+
+    .burger{
+      display:none;
+      width:44px;height:44px;
+      border-radius:14px;
+      border:1px solid rgba(15,23,42,.10);
+      background:#fff;
+      cursor:pointer;
+      align-items:center;
+      justify-content:center;
+      gap:5px;
+      flex-direction:column;
+    }
+    .burger span{
+      width:18px;height:2px;background:#0f172a;border-radius:999px;
+    }
+
+    .mobileMenu{
+      display:none;
+      border-top:1px solid rgba(15,23,42,.08);
+      padding:12px 14px 16px;
+      background:rgba(255,255,255,.96);
+      backdrop-filter: blur(10px);
+    }
+    .mobileMenu a{
+      display:block;
+      padding:12px 12px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:800;
+      color:#4b5f79;
+    }
+    .mobileMenu a.active{ background:#e9effa; color:var(--ro-blue); }
+    .mobileMenu a:hover{ background:#f3f6fb; color:#0f172a; }
+
+    /* ===== Layout ===== */
+    main{ min-height:60vh; }
+    .page{
+      display:none;
+      padding:70px 0 80px;
+    }
+    .page.active{ display:block; }
+
+    .wrap{
+      max-width:var(--ro-max);
+      margin:0 auto;
+      padding:0 24px;
+    }
+
+    /* ===== Hero ===== */
+    .hero{
+      text-align:center;
+      padding:16px 0 48px;
+    }
+    .pageTitle{
+      margin:0;
+      font-size: clamp(34px, 4.8vw, 64px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      font-weight:900;
+    }
+    .underline{
+      width:92px;
+      height:5px;
+      border-radius:999px;
+      background:var(--ro-gold);
+      margin:14px auto 18px;
+    }
+    .subtitle{
+      max-width:860px;
+      margin:0 auto;
+      color:var(--ro-muted);
+      font-size: clamp(16px, 1.6vw, 20px);
+      line-height:1.6;
+    }
+
+    /* ===== Sections ===== */
+    .section{
+      padding:42px 0;
+    }
+    .sectionHead{
+      margin:0 0 18px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size:26px;
+      line-height:1.15;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+    .sectionHead p{
+      margin:0;
+      color:var(--ro-muted);
+      font-size:15px;
+      line-height:1.6;
+      max-width:520px;
+    }
+
+    /* ===== Cards & Grid ===== */
+    .grid2{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .grid3{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .grid4{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+
+    .card{
+      background:var(--ro-card);
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:var(--ro-radius);
+      box-shadow:var(--ro-shadow);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:#f8fbff;
+      border:1px solid rgba(15,23,42,.08);
+      color:#5b6f8f;
+      font-size:13px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .btnRow{ display:flex; gap:12px; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:14px;
+      text-decoration:none;
+      border:1px solid transparent;
+      cursor:pointer;
+      transition:.15s ease;
+      user-select:none;
+      background:#fff;
+      color:var(--ro-text);
+      border-color:rgba(15,23,42,.12);
+    }
+    .btn:hover{ transform:translateY(-1px); background:#f8fafc; }
+    .btn.primary{
+      background:var(--ro-blue);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 12px 24px rgba(23,63,159,.20);
+    }
+    .btn.primary:hover{ background:#123687; }
+    .btn.ghost{
+      background:#fff;
+      color:var(--ro-text);
+    }
+
+    /* ===== Home ===== */
+    .homeHeroTitle{
+      margin:0;
+      font-size: clamp(36px, 5.2vw, 70px);
+      line-height:1.0;
+      font-weight:900;
+      letter-spacing:-.04em;
+    }
+    .homeHeroTitle span{ color:var(--ro-blue); }
+
+    .chips{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .statsCard{
+      padding:26px 18px;
+      text-align:center;
+    }
+    .statIcon{
+      width:58px; height:58px;
+      margin:0 auto 14px;
+      border-radius:18px;
+      display:grid; place-items:center;
+      background:#eef4ff;
+      color:var(--ro-blue);
+      font-size:26px;
+    }
+    .statNum{
+      font-size:50px;
+      font-weight:900;
+      line-height:1;
+      letter-spacing:-.03em;
+    }
+    .statLbl{
+      margin-top:8px;
+      color:#687a95;
+      font-size:15px;
+      font-weight:700;
+    }
+
+    .aboutCard{
+      padding:32px;
+    }
+    .feature{
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+      padding:28px;
+      border-radius:var(--ro-radius);
+      border:1px solid rgba(15,23,42,.10);
+      background:#fff;
+      box-shadow:var(--ro-shadow);
+    }
+    .featureIcon{
+      width:72px; height:72px;
+      border-radius:20px;
+      display:grid; place-items:center;
+      background:#e9eef8;
+      color:var(--ro-blue);
+      font-size:34px;
+      flex:0 0 72px;
+    }
+    .feature h3{
+      margin:2px 0 10px;
+      font-size:22px;
+      font-weight:900;
+    }
+    .feature p{
+      margin:0;
+      color:var(--ro-muted);
+      line-height:1.65;
+      font-size:15px;
+    }
+
+    .execCard{ overflow:hidden; }
+    .execTop{
+      height:185px;
+      background:linear-gradient(135deg,#dbe8ff,#b8c9ef 50%, #e9eef8);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .initials{
+      width:92px;height:92px;border-radius:50%;
+      background:var(--ro-blue);
+      color:#fff;
+      display:grid;place-items:center;
+      font-weight:900;font-size:34px;
+      box-shadow:0 10px 22px rgba(23,63,159,.25);
+    }
+    .execBody{
+      padding:20px 22px 24px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 14px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      line-height:1;
+    }
+    .badgeGold{ background:#f0bd10; color:#111827; }
+    .badgeBlue{ background:var(--ro-blue); color:#fff; }
+    .badgeSoft{ background:#eef4ff; color:var(--ro-blue); }
+    .execName{
+      margin:16px 0 8px;
+      font-weight:900;
+      font-size:22px;
+      line-height:1.2;
+    }
+    .execRole{ color:var(--ro-blue); font-weight:800; font-size:16px; }
+    .execDept{ color:#6f829b; font-size:14px; margin-top:4px; }
+    .execBio{
+      margin-top:16px;
+      color:var(--ro-muted);
+      line-height:1.65;
+      font-size:14.5px;
+    }
+    .execFun{
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid var(--ro-line);
+      color:var(--ro-muted);
+      font-size:14.5px;
+      line-height:1.6;
+    }
+    .execFun strong{ color:var(--ro-text); }
+
+    /* ===== Events ===== */
+    .eventCard{ overflow:hidden; }
+    .imgTop{
+      height:150px;
+      background:linear-gradient(135deg,#dbe8ff,#edf2fa);
+      position:relative;
+    }
+    .imgTop::after{
+      content:"";
+      position:absolute; left:0; right:0; bottom:0;
+      height:70px;
+      background:linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+    }
+    .imgTop.photo1{ background:linear-gradient(135deg,#dbe8ff,#edf2fa), url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=60'); background-size:cover; background-position:center; }
+    .imgTop.photo2{ background:linear-gradient(135deg,#dbe8ff,#edf2fa), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=60'); background-size:cover; background-position:center; }
+    .imgTop.photo3{ background:linear-gradient(135deg,#dbe8ff,#edf2fa), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=60'); background-size:cover; background-position:center; }
+    .imgTop.photo4{ background:linear-gradient(135deg,#dbe8ff,#edf2fa), url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=60'); background-size:cover; background-position:center; }
+    .imgTop.photo5{ background:linear-gradient(135deg,#dbe8ff,#edf2fa), url('https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=1200&q=60'); background-size:cover; background-position:center; }
+
+    .tagTop{
+      position:absolute; left:14px; top:14px;
+      z-index:2;
+    }
+    .cardBody{ padding:22px; }
+    .cardBody h3{
+      margin:0 0 12px;
+      font-size:20px;
+      font-weight:900;
+      line-height:1.25;
+    }
+    .cardBody p{
+      margin:0;
+      color:var(--ro-muted);
+      line-height:1.68;
+      font-size:14.5px;
+    }
+    .meta{
+      margin-top:14px;
+      display:grid;
+      gap:8px;
+      color:#6a7d97;
+      font-size:14.5px;
+    }
+    .meta div{ display:flex; gap:10px; align-items:flex-start; }
+
+    /* ===== Competitions ===== */
+    .deadlineRow{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+    .deadlineCard{
+      padding:16px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.10);
+      box-shadow:var(--ro-shadow);
+    }
+    .deadlineCard.urgent{
+      border-color:#fca5a5;
+      background:#fff7f7;
+    }
+    .deadlineTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+      margin-bottom:10px;
+    }
+    .miniTag{
+      display:inline-flex;
+      align-items:center;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:11.5px;
+      font-weight:900;
+      line-height:1;
+      white-space:nowrap;
+    }
+    .miniRed{ background:#ef4444; color:#fff; }
+    .miniGold{ background:#f0bd10; color:#111827; }
+    .miniSoft{ background:#f3f4f6; color:#111827; }
+
+    .deadlineName{ font-weight:900; font-size:14.5px; line-height:1.25; margin-bottom:8px; }
+    .deadlineDate{ color:#70839c; font-size:13px; display:flex; gap:10px; align-items:center; }
+
+    .guideCard{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      overflow:hidden;
+      border-radius:var(--ro-radius);
+    }
+    .guideSide{
+      padding:26px 18px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      border-right:1px solid var(--ro-line);
+    }
+    .guideSide.blue{ background:#dde6f8; }
+    .guideSide.gold{ background:#f3ebc5; }
+    .guideSide.soft{ background:#e9eef8; }
+    .guideIcon{
+      font-size:52px;
+      color:var(--ro-blue);
+      margin-bottom:10px;
+    }
+    .guideCode{
+      font-size:40px;
+      font-weight:900;
+      line-height:1;
+    }
+    .guideLevel{ margin-top:10px; }
+    .guideMain{ padding:22px 18px; }
+    .guideMain h3{ margin:0 0 10px; font-size:18px; font-weight:900; }
+    .guideInline{
+      display:flex; flex-wrap:wrap; gap:14px;
+      color:#71839c; font-size:13px;
+      margin-bottom:12px;
+    }
+    .guideMain p{ margin:0; color:var(--ro-muted); line-height:1.72; font-size:14.5px; }
+    .guideMain .btn{ margin-top:14px; padding:10px 14px; font-size:13px; }
+
+    .pathway{
+      text-align:center;
+      padding-top:12px;
+    }
+    .pathwayRow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .pathCard{
+      width:142px;
+      padding:20px 14px;
+      text-align:center;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:18px;
+      box-shadow:var(--ro-shadow);
+    }
+    .pathCard .guideIcon{ font-size:40px; margin:0 0 8px; }
+    .pathName{ font-weight:900; font-size:16px; }
+    .arrow{ font-size:28px; color:#6f829b; }
+
+    /* ===== Newsletter ===== */
+    .featureNews{
+      display:grid;
+      grid-template-columns:300px 1fr;
+      overflow:hidden;
+    }
+    .featureLeft{
+      background:#dde6f8;
+      padding:30px 20px;
+      text-align:center;
+      border-right:1px solid var(--ro-line);
+    }
+    .featureLeft .featureIcon{
+      font-size:74px;
+      color:var(--ro-blue);
+      margin:22px 0 12px;
+    }
+    .featureRight{
+      padding:26px 22px;
+    }
+    .featureRight h3{
+      margin:0 0 10px;
+      font-size:30px;
+      line-height:1.15;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+    .featureRight p{
+      margin:0;
+      color:var(--ro-muted);
+      line-height:1.72;
+      font-size:14.5px;
+    }
+    .featureActions{
+      margin-top:18px;
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+
+    .archiveCard{ padding:18px; }
+    .archiveCard h3{ margin:0 0 8px; font-size:16px; font-weight:900; }
+    .archiveCard p{ margin:0; color:var(--ro-muted); font-size:13.5px; line-height:1.6; }
+    .archiveCard .meta{ margin-top:10px; }
+
+    /* ===== Resources ===== */
+    .tabs{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      padding:10px;
+      border-radius:16px;
+      background:#e9eef5;
+      margin-bottom:24px;
+    }
+    .tab{
+      padding:14px 16px;
+      border:none;
+      border-radius:14px;
+      background:transparent;
+      color:#667995;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .tab.active{
+      background:#fff;
+      color:var(--ro-text);
+      box-shadow:0 4px 10px rgba(15,23,42,.06);
+    }
+    .pane{ display:none; }
+    .pane.active{ display:block; }
+
+    .listCard{ padding:22px; }
+    .listTitle{
+      margin:0 0 12px;
+      font-size:18px;
+      font-weight:900;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .numList{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+    .numItem{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      color:var(--ro-muted);
+      line-height:1.65;
+      font-size:14.5px;
+    }
+    .numBullet{
+      width:22px;height:22px;
+      border-radius:50%;
+      background:#e8eefb;
+      color:var(--ro-blue);
+      font-weight:900;
+      font-size:12px;
+      display:grid;place-items:center;
+      flex:0 0 22px;
+      margin-top:2px;
+    }
+
+    .templateCard{ padding:18px; }
+    .templateHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .templateHead h3{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .copyBtn{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(15,23,42,.12);
+      background:#fff;
+      cursor:pointer;
+      font-weight:900;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .copyBtn:hover{ background:#f8fafc; transform:translateY(-1px); }
+
+    .codeBox{
+      background:#f8fbff;
+      border:1px solid var(--ro-line);
+      border-radius:16px;
+      padding:16px;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:12.8px;
+      line-height:1.55;
+      color:#51657f;
+      white-space:pre-wrap;
+    }
+
+    .infoCard{ padding:20px; }
+    .infoCard h3{ margin:0 0 10px; font-size:18px; font-weight:900; }
+    .infoCard p{ margin:0; color:var(--ro-muted); line-height:1.68; font-size:14.5px; }
+
+    .tipBox{
+      padding:22px;
+      border:1px dashed #a9bddf;
+      background:#f4f8ff;
+      border-radius:var(--ro-radius);
+    }
+
+    /* ===== Outreach ===== */
+    .makeDiff{
+      display:grid;
+      grid-template-columns:320px 1fr;
+      overflow:hidden;
+    }
+    .makeLeft{
+      background:linear-gradient(135deg,#efe4bf,#f8f2db);
+      display:grid;
+      place-items:center;
+      padding:18px;
+      border-right:1px solid var(--ro-line);
+    }
+    .heart{
+      width:180px;height:180px;
+      border-radius:28px;
+      background:rgba(255,255,255,.65);
+      border:1px solid rgba(15,23,42,.10);
+      display:grid;
+      place-items:center;
+      font-size:82px;
+      color:#64748b;
+    }
+    .makeRight{ padding:24px 24px; }
+    .makeRight h3{ margin:0 0 10px; font-size:22px; font-weight:900; }
+    .makeRight p{ margin:0; color:var(--ro-muted); line-height:1.68; font-size:14.5px; }
+
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px 28px;
+      margin-top:14px;
+    }
+    .benefit{
+      display:flex;
+      gap:10px;
+      color:var(--ro-muted);
+      font-size:14.5px;
+      line-height:1.55;
+      align-items:flex-start;
+    }
+    .check{
+      width:18px;height:18px;border-radius:50%;
+      background:#e8eefb;color:var(--ro-blue);
+      display:grid;place-items:center;
+      font-weight:900;
+      font-size:12px;
+      margin-top:2px;
+      flex:0 0 18px;
+    }
+
+    .oppCard{ padding:18px; }
+    .oppTitle{ margin:14px 0 10px; font-size:16px; font-weight:900; }
+    .oppCard p{ margin:0; color:var(--ro-muted); line-height:1.68; font-size:14.5px; }
+
+    .smallMeta{
+      margin-top:12px;
+      display:grid;
+      gap:8px;
+      color:#6a7d97;
+      font-size:13.5px;
+    }
+    .smallMeta div{ display:flex; gap:10px; align-items:flex-start; }
+
+    .cta{
+      max-width:620px;
+      margin:0 auto;
+      padding:32px 26px;
+      text-align:center;
+    }
+    .ctaIcon{
+      width:74px;height:74px;
+      margin:0 auto 16px;
+      border-radius:20px;
+      display:grid;place-items:center;
+      background:#eef4ff;
+      color:var(--ro-blue);
+      font-size:34px;
+    }
+    .cta h3{ margin:0 0 10px; font-size:20px; font-weight:900; }
+    .cta p{ margin:0 0 16px; color:var(--ro-muted); line-height:1.65; font-size:14.5px; }
+    .cta .btnRow{ justify-content:center; }
+
+    /* ===== Help ===== */
+    .faqCard{ padding:12px; }
+    .faqItem{
+      border-radius:16px;
+      border:1px solid rgba(15,23,42,.10);
+      background:#fff;
+      overflow:hidden;
+    }
+    .faqBtn{
+      width:100%;
+      text-align:left;
+      padding:16px 16px;
+      border:none;
+      background:#fff;
+      cursor:pointer;
+      font-weight:900;
+      color:var(--ro-text);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .faqBtn:hover{ background:#f8fafc; }
+    .faqAns{
+      display:none;
+      padding:0 16px 16px;
+      color:var(--ro-muted);
+      line-height:1.68;
+      font-size:14.5px;
+    }
+    .faqItem.open .faqAns{ display:block; }
+    .chev{ color:#6a7d97; font-weight:900; }
+
+    .quickLinks{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+    .qlCard{
+      padding:18px;
+      text-align:center;
+      border-radius:18px;
+      background:#fff;
+      border:1px solid rgba(15,23,42,.10);
+      box-shadow:var(--ro-shadow);
+      cursor:pointer;
+      user-select:none;
+      transition:.15s ease;
+    }
+    .qlCard:hover{ transform:translateY(-2px); }
+    .qlIcon{
+      width:56px;height:56px;
+      margin:0 auto 12px;
+      border-radius:18px;
+      background:#eef4ff;
+      color:var(--ro-blue);
+      display:grid;place-items:center;
+      font-size:24px;
+    }
+    .qlCard .qlTitle{ font-weight:900; font-size:14px; }
+
+    /* ===== Footer ===== */
+    footer{
+      background:#0f3a9b;
+      color:#eaf1ff;
+      margin-top:60px;
+    }
+    .footerWrap{
+      max-width:var(--ro-max);
+      margin:0 auto;
+      padding:34px 24px;
+    }
+    .footGrid{
+      display:grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap:22px;
+      align-items:flex-start;
+    }
+    .footBrand{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .footLogo{
+      width:42px;height:42px;border-radius:14px;
+      background:#f0bd10;
+      color:#111827;
+      display:grid;place-items:center;
+      font-weight:900;
+    }
+    .footTitle{ font-weight:900; margin:0; }
+    .footDesc{ margin:6px 0 0; color:#cfe0ff; font-size:13.5px; line-height:1.6; }
+    .footCol h4{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.02em;
+      font-weight:900;
+      color:#fff;
+    }
+    .footCol a{
+      display:block;
+      text-decoration:none;
+      color:#cfe0ff;
+      font-size:13.5px;
+      padding:8px 0;
+    }
+    .footCol a:hover{ color:#fff; text-decoration:underline; }
+    .social{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .socBtn{
+      width:36px;height:36px;border-radius:999px;
+      background:#f0bd10;
+      color:#111827;
+      display:grid;place-items:center;
+      font-weight:900;
+      text-decoration:none;
+    }
+    .socBtn:hover{ transform:translateY(-1px); }
+    .copyright{
+      margin-top:22px;
+      padding-top:18px;
+      border-top:1px solid rgba(255,255,255,.18);
+      color:#cfe0ff;
+      font-size:12.5px;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px){
+      .navlinks{ display:none; }
+      .burger{ display:flex; }
+      .deadlineRow{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .guideCard{ grid-template-columns:1fr; }
+      .guideSide{ border-right:none; border-bottom:1px solid var(--ro-line); }
+      .featureNews{ grid-template-columns:1fr; }
+      .featureLeft{ border-right:none; border-bottom:1px solid var(--ro-line); }
+      .makeDiff{ grid-template-columns:1fr; }
+      .makeLeft{ border-right:none; border-bottom:1px solid var(--ro-line); }
+      .footGrid{ grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width: 760px){
+      .grid4{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .grid3{ grid-template-columns:1fr; }
+      .grid2{ grid-template-columns:1fr; }
+      .deadlineRow{ grid-template-columns:1fr; }
+      .quickLinks{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .tabs{ grid-template-columns:repeat(2,1fr); }
+      .benefits{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== TOP NAV ===== -->
+  <header class="topbar">
+    <div class="navwrap">
+      <a class="brand" href="#" data-nav="home" aria-label="TAMS Research Org Home">
+        <div class="logo" aria-hidden="true">🧪</div>
+        <div class="name">TAMS <span>Research Org</span></div>
+      </a>
+
+      <nav class="navlinks" aria-label="Primary navigation">
+        <a href="#" data-nav="home" class="active">About</a>
+        <a href="#" data-nav="events">Events</a>
+        <a href="#" data-nav="competitions">Competitions</a>
+        <a href="#" data-nav="newsletter">Newsletter</a>
+        <a href="#" data-nav="resources">Resources</a>
+        <a href="#" data-nav="outreach">Outreach</a>
+        <a href="#" data-nav="help">Help</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="#" data-nav="home" class="active">About</a>
+      <a href="#" data-nav="events">Events</a>
+      <a href="#" data-nav="competitions">Competitions</a>
+      <a href="#" data-nav="newsletter">Newsletter</a>
+      <a href="#" data-nav="resources">Resources</a>
+      <a href="#" data-nav="outreach">Outreach</a>
+      <a href="#" data-nav="help">Help</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HOME / ABOUT ===== -->
+    <section class="page active" id="page-home" data-page="home">
+      <div class="wrap">
+        <div class="hero">
+          <h1 class="homeHeroTitle">TAMS <span>Research Org</span></h1>
+          <div class="underline"></div>
+          <p class="subtitle">
+            Connecting students with mentors, research opportunities, and the competitions that help them grow.
+          </p>
+          <div class="chips">
+            <span class="pill">🔬 Research mentoring</span>
+            <span class="pill">🏆 Competitions & deadlines</span>
+            <span class="pill">📬 Cold email templates</span>
+            <span class="pill">🧭 Finding labs at UNT</span>
+          </div>
+          <div class="btnRow" style="justify-content:center;margin-top:22px;">
+            <a class="btn primary" href="#" data-nav="resources">Explore Resources</a>
+            <a class="btn" href="#" data-nav="events">See Events</a>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2>At a Glance</h2>
+            <p>Quick stats that explain what we do and how students use RO across the year.</p>
+          </div>
+
+          <div class="grid4">
+            <div class="card statsCard">
+              <div class="statIcon">📅</div>
+              <div class="statNum">12+</div>
+              <div class="statLbl">Events / Year</div>
+            </div>
+            <div class="card statsCard">
+              <div class="statIcon">👥</div>
+              <div class="statNum">200+</div>
+              <div class="statLbl">Students Reached</div>
+            </div>
+            <div class="card statsCard">
+              <div class="statIcon">🧠</div>
+              <div class="statNum">30+</div>
+              <div class="statLbl">Mentor Matches</div>
+            </div>
+            <div class="card statsCard">
+              <div class="statIcon">🏆</div>
+              <div class="statNum">4</div>
+              <div class="statLbl">Competition Tracks</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2>What We Do</h2>
+            <p>We make it easier to start research, stay organized, and show up prepared for competition season.</p>
+          </div>
+
+          <div class="grid2">
+            <div class="feature">
+              <div class="featureIcon">🔎</div>
+              <div>
+                <h3>Find Research</h3>
+                <p>Step-by-step guidance for finding labs, reading papers, and writing emails that actually get replies.</p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="featureIcon">🧰</div>
+              <div>
+                <h3>Support & Templates</h3>
+                <p>Copy-ready templates for cold emails, follow-ups, and reaching out to mentors and programs.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="grid2">
+            <div class="feature">
+              <div class="featureIcon">🎤</div>
+              <div>
+                <h3>Prepare for Competitions</h3>
+                <p>Deadlines, rules, and what to submit for TJAS, FWRSEF, TXSEF, and ISEF.</p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="featureIcon">🤝</div>
+              <div>
+                <h3>Community & Outreach</h3>
+                <p>Volunteer opportunities that build real skills while giving back to the next generation of scientists.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2>Executive Board</h2>
+            <p>Example layout (replace names + text with your real RO exec board).</p>
+          </div>
+
+          <div class="grid3">
+            <div class="card execCard">
+              <div class="execTop"><div class="initials">RO</div></div>
+              <div class="execBody">
+                <span class="badge badgeGold">President</span>
+                <div class="execName">Research Organization</div>
+                <div class="execRole">Student Leadership Team</div>
+                <div class="execDept">Texas Academy of Mathematics and Science</div>
+                <div class="execBio">
+                  Oversees RO programming, manages the annual calendar, and coordinates competitions, mentorship, and outreach initiatives.
+                </div>
+                <div class="execFun"><strong>Fun Fact:</strong> Ask us about the best “first email” subject lines.</div>
+              </div>
+            </div>
+
+            <div class="card execCard">
+              <div class="execTop"><div class="initials">JR</div></div>
+              <div class="execBody">
+                <span class="badge badgeBlue">VP Programs</span>
+                <div class="execName">Programs Lead</div>
+                <div class="execRole">Events & Workshops</div>
+                <div class="execDept">TAMS / UNT</div>
+                <div class="execBio">
+                  Runs Search for Research, research skills seminars, and student-facing events across the year.
+                </div>
+                <div class="execFun"><strong>Fun Fact:</strong> Our favorite workshop is “How to read papers fast.”</div>
+              </div>
+            </div>
+
+            <div class="card execCard">
+              <div class="execTop"><div class="initials">SC</div></div>
+              <div class="execBody">
+                <span class="badge badgeSoft">Competitions</span>
+                <div class="execName">Competitions Lead</div>
+                <div class="execRole">FWRSEF / TXSEF / ISEF</div>
+                <div class="execDept">Regeneron Pathway</div>
+                <div class="execBio">
+                  Maintains deadlines, submission checklists, and guides students through each competition stage.
+                </div>
+                <div class="execFun"><strong>Fun Fact:</strong> The best posters are edited in rounds, not once.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footerWrap">
+          <div class="footGrid">
+            <div class="footBrand">
+              <div class="footLogo" aria-hidden="true">🧪</div>
+              <div>
+                <p class="footTitle">TAMS RO</p>
+                <p class="footDesc">Making research accessible for every TAMS student.</p>
+              </div>
+            </div>
+
+            <div class="footCol">
+              <h4>Quick Links</h4>
+              <a href="#" data-nav="events">Events</a>
+              <a href="#" data-nav="competitions">Competitions</a>
+              <a href="#" data-nav="resources">Resources</a>
+              <a href="#" data-nav="outreach">Volunteer</a>
+            </div>
+
+            <div class="footCol">
+              <h4>Resources</h4>
+              <a href="#" data-nav="resources">Cold Email Templates</a>
+              <a href="#" data-nav="resources">Finding Research</a>
+              <a href="#" data-nav="resources">How-To Videos</a>
+              <a href="#" data-nav="newsletter">Newsletter</a>
+            </div>
+
+            <div class="footCol">
+              <h4>Connect With Us</h4>
+              <div class="social">
+                <a class="socBtn" href="#" title="Instagram">⌁</a>
+                <a class="socBtn" href="#" title="Discord">◔</a>
+                <a class="socBtn" href="#" title="Group Chat">👥</a>
+                <a class="socBtn" href="#" title="Email">✉</a>
+              </div>
+              <div style="margin-top:10px; color:#cfe0ff; font-size:13.5px;">
+                📍 Denton, TX<br />
+                ✉ research@yourorg.org
+              </div>
+            </div>
+          </div>
+
+          <div class="copyright">
+            © 2026 TAMS Research Organization. All rights reserved.<br />
+            Texas Academy of Mathematics and Science at UNT
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ===== EVENTS ===== -->
+    <section class="page" id="page-events" data-page="events">
+      <div class="wrap">
+        <div class="hero">
+          <h1 class="pageTitle">Events</h1>
+          <div class="underline"></div>
+          <p class="subtitle">
+            Discover our annual events designed to connect students with research opportunities and prepare them for success.
+          </p>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2 style="display:flex;gap:10px;align-items:center;margin:0;">
+              <span style="color:var(--ro-blue);font-size:22px;">📅</span> Upcoming Events
+            </h2>
+            <p></p>
+          </div>
+
+          <div class="grid3">
+            <div class="card eventCard">
+              <div class="imgTop" style="background:linear-gradient(135deg,#dbe8ff,#edf2fa);"></div>
+              <div class="tagTop"><span class="pill">Lab Tour</span></div>
+              <div class="cardBody">
+                <h3>Fall Lab Tour - Chemistry Department</h3>
+                <div class="meta">
+                  <div>📅 <span>October 15, 2024</span></div>
+                  <div>📍 <span>Chemistry Building, Room 204</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card eventCard">
+              <div class="imgTop" style="background:linear-gradient(135deg,#dbe8ff,#edf2fa);"></div>
+              <div class="tagTop"><span class="pill">Seminar</span></div>
+              <div class="cardBody">
+                <h3>Research Skills Seminar - Poster Design</h3>
+                <div class="meta">
+                  <div>📅 <span>October 22, 2024</span></div>
+                  <div>📍 <span>McConnell Hall</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card eventCard">
+              <div class="imgTop" style="background:linear-gradient(135deg,#dbe8ff,#edf2fa);"></div>
+              <div class="tagTop"><span class="pill">Flagship Event</span></div>
+              <div class="cardBody">
+                <h3>Search for Research 2024</h3>
+                <div class="meta">
+                  <div>📅 <span>November 5, 2024</span></div>
+                  <div>📍 <span>Gateway Center Ballroom</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2>Our Events</h2>
+            <p>Learn more about each of our signature events.</p>
+          </div>
+
+          <div class="grid3">
+            <div class="card eventCard">
+              <div class="imgTop photo1"></div>
+              <div class="tagTop"><span class="badge badgeGold">Early October</span></div>
+              <div class="cardBody">
+                <h3>Search for Research</h3>
+                <p>Search for Research is an annual event hosted by the TAMS Research Organization in early October. The aim is to connect juniors with UNT professors looking for lab members.</p>
+              </div>
+            </div>
+
+            <div class="card eventCard">
+              <div class="imgTop photo3"></div>
+              <div class="tagTop"><span class="badge badgeGold">Before FWRSEF</span></div>
+              <div class="cardBody">
+                <h3>TAMS Fair</h3>
+                <p>TAMS Fair occurs annually to prepare students before the Fort Worth Regional Science and Engineering Fair by practicing their poster presentation and receiving feedback.</p>
+              </div>
+            </div>
+
+            <div class="card eventCard">
+              <div class="imgTop photo2"></div>
+              <div class="tagTop"><span class="badge badgeGold">Throughout Year</span></div>
+              <div class="cardBody">
+                <h3>Research Skills Seminars</h3>
+                <p>Personalized seminars that help students prepare for competitions (FWRSEF, TJAS, ISEF) with direct feedback on projects.</p>
+              </div>
+            </div>
+
+            <div class="card eventCard">
+              <div class="imgTop photo4"></div>
+              <div class="tagTop"><span class="badge badgeGold">Monthly</span></div>
+              <div class="cardBody">
+                <h3>Laboratory Trips</h3>
+                <p>Guided tours of UNT labs where professors explain research projects and students can ask questions and explore fields.</p>
+              </div>
+            </div>
+
+            <div class="card eventCard">
+              <div class="imgTop photo5"></div>
+              <div class="tagTop"><span class="badge badgeGold">Summer (Late July)</span></div>
+              <div class="cardBody">
+                <h3>reSEARCH Sessions</h3>
+                <p>One-on-one online info sessions for incoming juniors with RO execs about contacting professors and starting research.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footerWrap">
+          <div class="footGrid">
+            <div class="footBrand">
+              <div class="footLogo" aria-hidden="true">🧪</div>
+              <div>
+                <p class="footTitle">TAMS RO</p>
+                <p class="footDesc">Making research accessible for every TAMS student.</p>
+              </div>
+            </div>
+            <div class="footCol">
+              <h4>Quick Links</h4>
+              <a href="#" data-nav="events">Events</a>
+              <a href="#" data-nav="competitions">Competitions</a>
+              <a href="#" data-nav="resources">Resources</a>
+              <a href="#" data-nav="outreach">Volunteer</a>
+            </div>
+            <div class="footCol">
+              <h4>Resources</h4>
+              <a href="#" data-nav="resources">Cold Email Templates</a>
+              <a href="#" data-nav="resources">Finding Research</a>
+              <a href="#" data-nav="resources">How-To Videos</a>
+              <a href="#" data-nav="newsletter">Newsletter</a>
+            </div>
+            <div class="footCol">
+              <h4>Connect With Us</h4>
+              <div class="social">
+                <a class="socBtn" href="#" title="Instagram">⌁</a>
+                <a class="socBtn" href="#" title="Discord">◔</a>
+                <a class="socBtn" href="#" title="Group Chat">👥</a>
+                <a class="socBtn" href="#" title="Email">✉</a>
+              </div>
+              <div style="margin-top:10px; color:#cfe0ff; font-size:13.5px;">
+                📍 Denton, TX<br />
+                ✉ research@yourorg.org
+              </div>
+            </div>
+          </div>
+          <div class="copyright">
+            © 2026 TAMS Research Organization. All rights reserved.<br />
+            Texas Academy of Mathematics and Science at UNT
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ===== COMPETITIONS ===== -->
+    <section class="page" id="page-competitions" data-page="competitions">
+      <div class="wrap">
+        <div class="hero">
+          <h1 class="pageTitle">Competitions</h1>
+          <div class="underline"></div>
+          <p class="subtitle">Showcase your research and compete at regional, state, and international levels.</p>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2 style="display:flex;gap:10px;align-items:center;">
+              <span style="color:#ef4444;font-size:20px;">⦿</span> Upcoming Deadlines
+            </h2>
+            <p></p>
+          </div>
+
+          <div class="deadlineRow">
+            <div class="deadlineCard urgent">
+              <div class="deadlineTop">
+                <span class="miniTag miniRed">TJAS</span>
+                <span class="miniTag miniRed">Urgent</span>
+              </div>
+              <div class="deadlineName">Abstract Submission</div>
+              <div class="deadlineDate">📅 <span>September 15, 2024</span></div>
+            </div>
+
+            <div class="deadlineCard">
+              <div class="deadlineTop">
+                <span class="miniTag miniGold">FWRSEF</span>
+                <span class="miniTag miniSoft"> </span>
+              </div>
+              <div class="deadlineName">Registration</div>
+              <div class="deadlineDate">📅 <span>January 10, 2025</span></div>
+            </div>
+
+            <div class="deadlineCard">
+              <div class="deadlineTop">
+                <span class="miniTag miniGold">FWRSEF</span>
+                <span class="miniTag miniSoft"> </span>
+              </div>
+              <div class="deadlineName">Paper Submission</div>
+              <div class="deadlineDate">📅 <span>February 1, 2025</span></div>
+            </div>
+
+            <div class="deadlineCard">
+              <div class="deadlineTop">
+                <span class="miniTag miniGold">TXSEF</span>
+                <span class="miniTag miniSoft"> </span>
+              </div>
+              <div class="deadlineName">Qualification Required</div>
+              <div class="deadlineDate">📅 <span>March 1, 2025</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2>Competition Guide</h2>
+            <p>Everything you need to know about each competition.</p>
+          </div>
+
+          <div class="card guideCard">
+            <div class="guideSide blue">
+              <div class="guideIcon">🏆</div>
+              <div class="guideCode">FWRSEF</div>
+              <div class="guideLevel"><span class="badge badgeSoft">Regional</span></div>
+            </div>
+            <div class="guideMain">
+              <h3>Fort Worth Regional Science and Engineering Fair</h3>
+              <div class="guideInline">
+                <span>📅 Mid-February</span>
+                <span>📍 University of Texas at Arlington</span>
+              </div>
+              <p>
+                A multi-day research showcase where participants present their poster to judges in a live pitch. Category winners can advance to TXSEF, and Best of Fair typically qualifies directly to ISEF.
+              </p>
+              <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Official Website</a>
+            </div>
+          </div>
+
+          <div style="height:16px"></div>
+
+          <div class="card guideCard">
+            <div class="guideSide gold">
+              <div class="guideIcon">🏆</div>
+              <div class="guideCode">TXSEF</div>
+              <div class="guideLevel"><span class="badge badgeGold">State</span></div>
+            </div>
+            <div class="guideMain">
+              <h3>Texas State Science and Engineering Fair</h3>
+              <div class="guideInline">
+                <span>📅 Late March</span>
+                <span>📍 Texas A&amp;M, College Station</span>
+              </div>
+              <p>
+                The next level of the Regeneron Science Fair pathway. Qualification comes from regional fairs. Top projects may advance to ISEF.
+              </p>
+              <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Official Website</a>
+            </div>
+          </div>
+
+          <div style="height:16px"></div>
+
+          <div class="card guideCard">
+            <div class="guideSide soft">
+              <div class="guideIcon">🏆</div>
+              <div class="guideCode">ISEF</div>
+              <div class="guideLevel"><span class="badge badgeSoft">International</span></div>
+            </div>
+            <div class="guideMain">
+              <h3>International Science and Engineering Fair</h3>
+              <div class="guideInline">
+                <span>📅 May</span>
+                <span>📍 Varies Annually</span>
+              </div>
+              <p>
+                The Regeneron International Science and Engineering Fair is a premier high school research competition where finalists from across the globe present their work.
+              </p>
+              <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Official Website</a>
+            </div>
+          </div>
+
+          <div style="height:16px"></div>
+
+          <div class="card guideCard">
+            <div class="guideSide blue">
+              <div class="guideIcon">🏆</div>
+              <div class="guideCode">TJAS</div>
+              <div class="guideLevel"><span class="badge badgeGold">State</span></div>
+            </div>
+            <div class="guideMain">
+              <h3>Texas Junior Academy of Science</h3>
+              <div class="guideInline">
+                <span>📅 Early October</span>
+                <span>📍 Texas A&amp;M</span>
+              </div>
+              <p>
+                A high school research presentation in early October. Projects must be individual. Students submit an abstract and completed paper, then deliver a 12-minute in-person presentation.
+              </p>
+              <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Official Website</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="section pathway">
+          <h2 style="margin:0;font-weight:900;letter-spacing:-.02em;">Competition Pathway</h2>
+          <p style="margin:8px 0 0;color:var(--ro-muted);">Your journey from regional to international recognition</p>
+
+          <div class="pathwayRow">
+            <div class="pathCard">
+              <div class="guideIcon">🌐</div>
+              <div class="pathName">FWRSEF</div>
+              <div style="margin-top:8px;"><span class="badge badgeGold">Regional</span></div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="pathCard">
+              <div class="guideIcon">📄</div>
+              <div class="pathName">TXSEF</div>
+              <div style="margin-top:8px;"><span class="badge badgeGold">State</span></div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="pathCard">
+              <div class="guideIcon">🏆</div>
+              <div class="pathName">ISEF</div>
+              <div style="margin-top:8px;"><span class="badge badgeGold">International</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footerWrap">
+          <div class="footGrid">
+            <div class="footBrand">
+              <div class="footLogo" aria-hidden="true">🧪</div>
+              <div>
+                <p class="footTitle">TAMS RO</p>
+                <p class="footDesc">Making research accessible for every TAMS student.</p>
+              </div>
+            </div>
+            <div class="footCol">
+              <h4>Quick Links</h4>
+              <a href="#" data-nav="events">Events</a>
+              <a href="#" data-nav="competitions">Competitions</a>
+              <a href="#" data-nav="resources">Resources</a>
+              <a href="#" data-nav="outreach">Volunteer</a>
+            </div>
+            <div class="footCol">
+              <h4>Resources</h4>
+              <a href="#" data-nav="resources">Cold Email Templates</a>
+              <a href="#" data-nav="resources">Finding Research</a>
+              <a href="#" data-nav="resources">How-To Videos</a>
+              <a href="#" data-nav="newsletter">Newsletter</a>
+            </div>
+            <div class="footCol">
+              <h4>Connect With Us</h4>
+              <div class="social">
+                <a class="socBtn" href="#" title="Instagram">⌁</a>
+                <a class="socBtn" href="#" title="Discord">◔</a>
+                <a class="socBtn" href="#" title="Group Chat">👥</a>
+                <a class="socBtn" href="#" title="Email">✉</a>
+              </div>
+              <div style="margin-top:10px; color:#cfe0ff; font-size:13.5px;">
+                📍 Denton, TX<br />
+                ✉ research@yourorg.org
+              </div>
+            </div>
+          </div>
+          <div class="copyright">
+            © 2026 TAMS Research Organization. All rights reserved.<br />
+            Texas Academy of Mathematics and Science at UNT
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="page" id="page-newsletter" data-page="newsletter">
+      <div class="wrap">
+        <div class="hero">
+          <h1 class="pageTitle">STEM Newsletter</h1>
+          <div class="underline"></div>
+          <p class="subtitle">
+            Monthly articles by TAMS students covering research news, student spotlights, and scientific discoveries.
+          </p>
+        </div>
+
+        <div class="section">
+          <div class="card featureNews">
+            <div class="featureLeft">
+              <div class="pill" style="justify-content:center;margin:0 auto;width:max-content;">🌟 Latest Issue</div>
+              <div class="featureIcon">📰</div>
+              <div style="color:#5b6f8f;font-weight:900;">October 2024</div>
+            </div>
+            <div class="featureRight">
+              <h3>October 2024 Issue</h3>
+              <p>
+                Featured: Search for Research recap, Interview with Dr. Chen on quantum computing research, student spotlight on recent ISEF qualifier, tips for writing a compelling research abstract, and upcoming competition deadlines.
+              </p>
+              <div class="featureActions">
+                <a class="btn primary" href="#" target="_blank" rel="noreferrer">↗ Read Online</a>
+                <a class="btn" href="#" target="_blank" rel="noreferrer">⬇ Download PDF</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2>Newsletter Archive</h2>
+            <p>Browse our previous issues.</p>
+          </div>
+
+          <div class="grid3">
+            <div class="card archiveCard">
+              <div class="meta" style="margin:0 0 10px;color:#6a7d97;">📅 <span>September 1, 2024</span></div>
+              <h3>September 2024 Issue</h3>
+              <p>Back to school edition: Tips for finding research as a junior, introduction to the new RO exec board, upcoming lab tours.</p>
+              <div class="btnRow" style="margin-top:12px;">
+                <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Read Issue</a>
+              </div>
+            </div>
+
+            <div class="card archiveCard">
+              <div class="meta" style="margin:0 0 10px;color:#6a7d97;">📅 <span>July 15, 2024</span></div>
+              <h3>Summer 2024 Special</h3>
+              <p>Summer research opportunities, REU programs recap, advice from seniors heading to top universities.</p>
+              <div class="btnRow" style="margin-top:12px;">
+                <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Read Issue</a>
+              </div>
+            </div>
+
+            <div class="card archiveCard">
+              <div class="meta" style="margin:0 0 10px;color:#6a7d97;">📅 <span>May 1, 2024</span></div>
+              <h3>May 2024 Issue</h3>
+              <p>ISEF coverage, end of year celebrations, research achievements of the graduating class.</p>
+              <div class="btnRow" style="margin-top:12px;">
+                <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Read Issue</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footerWrap">
+          <div class="footGrid">
+            <div class="footBrand">
+              <div class="footLogo" aria-hidden="true">🧪</div>
+              <div>
+                <p class="footTitle">TAMS RO</p>
+                <p class="footDesc">Making research accessible for every TAMS student.</p>
+              </div>
+            </div>
+            <div class="footCol">
+              <h4>Quick Links</h4>
+              <a href="#" data-nav="events">Events</a>
+              <a href="#" data-nav="competitions">Competitions</a>
+              <a href="#" data-nav="resources">Resources</a>
+              <a href="#" data-nav="outreach">Volunteer</a>
+            </div>
+            <div class="footCol">
+              <h4>Resources</h4>
+              <a href="#" data-nav="resources">Cold Email Templates</a>
+              <a href="#" data-nav="resources">Finding Research</a>
+              <a href="#" data-nav="resources">How-To Videos</a>
+              <a href="#" data-nav="newsletter">Newsletter</a>
+            </div>
+            <div class="footCol">
+              <h4>Connect With Us</h4>
+              <div class="social">
+                <a class="socBtn" href="#" title="Instagram">⌁</a>
+                <a class="socBtn" href="#" title="Discord">◔</a>
+                <a class="socBtn" href="#" title="Group Chat">👥</a>
+                <a class="socBtn" href="#" title="Email">✉</a>
+              </div>
+              <div style="margin-top:10px; color:#cfe0ff; font-size:13.5px;">
+                📍 Denton, TX<br />
+                ✉ research@yourorg.org
+              </div>
+            </div>
+          </div>
+          <div class="copyright">
+            © 2026 TAMS Research Organization. All rights reserved.<br />
+            Texas Academy of Mathematics and Science at UNT
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ===== RESOURCES ===== -->
+    <section class="page" id="page-resources" data-page="resources">
+      <div class="wrap">
+        <div class="hero">
+          <h1 class="pageTitle">Resources</h1>
+          <div class="underline"></div>
+          <p class="subtitle">
+            Everything you need to find research opportunities and succeed in your scientific journey.
+          </p>
+        </div>
+
+        <div class="section">
+          <div class="tabs" role="tablist" aria-label="Resources tabs">
+            <button class="tab active" data-tab="cold" role="tab" aria-selected="true">✉ Cold Email</button>
+            <button class="tab" data-tab="find" role="tab" aria-selected="false">🔎 Find Research</button>
+            <button class="tab" data-tab="tips" role="tab" aria-selected="false">💡 Tips</button>
+            <button class="tab" data-tab="links" role="tab" aria-selected="false">↗ Links</button>
+          </div>
+
+          <!-- Cold Email Pane -->
+          <div class="pane active" id="pane-cold" data-pane="cold">
+            <div class="grid2">
+              <div class="card listCard">
+                <div class="listTitle">💡 Email Tips</div>
+                <div class="numList">
+                  <div class="numItem"><div class="numBullet">1</div><div>Try to keep your emails under thirteen sentences.</div></div>
+                  <div class="numItem"><div class="numBullet">2</div><div>Read recently published articles by the professor and personalize your email using what you learned.</div></div>
+                  <div class="numItem"><div class="numBullet">3</div><div>Include a specific question you have or idea for their research.</div></div>
+                  <div class="numItem"><div class="numBullet">4</div><div>Ask to meet in person to discuss their research and potential lab positions.</div></div>
+                  <div class="numItem"><div class="numBullet">5</div><div>Always clarify that you are a TAMS student.</div></div>
+                </div>
+              </div>
+
+              <div class="card templateCard">
+                <div class="templateHead">
+                  <h3>📄 Email Template</h3>
+                  <button class="copyBtn" id="copyEmail" type="button">📋 Copy</button>
+                </div>
+
+                <div class="codeBox" id="emailTemplate">Subject: TAMS Student Interested in [Research Topic] - Request for Lab Position
+
+Dear Dr. [Professor's Last Name],
+
+My name is [Your Name], and I am a [Junior/Senior] at the Texas Academy of Mathematics and Science at the University of North Texas. I am writing to express my strong interest in your research on [specific topic from their recent publication].
+
+I recently read your paper "[Paper Title]" published in [Journal Name], and I was particularly fascinated by [specific finding or methodology]. This sparked my curiosity about [specific question related to their work].
+
+I am eager to contribute to your lab and would welcome the opportunity to discuss potential research positions. I am available to meet at your convenience, either in person or virtually.
+
+Thank you for considering my request. I look forward to hearing from you.
+
+Best regards,
+[Your Name]
+TAMS Class of [Year]
+[Your Email]</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Find Research Pane -->
+          <div class="pane" id="pane-find" data-pane="find">
+            <div class="grid2">
+              <div class="card infoCard">
+                <h3>🎬 Video Guide</h3>
+                <p>Review this helpful video by Dr. James Duban, the Associate Dean for Research and National Scholarships.</p>
+                <div class="btnRow" style="margin-top:14px;">
+                  <a class="btn primary" href="#" target="_blank" rel="noreferrer">↗ Watch: Locating a Research Mentor at UNT</a>
+                </div>
+              </div>
+
+              <div class="card infoCard">
+                <h3>🔎 UNT Research Database</h3>
+                <p>
+                  Search by keyword in UNT research databases. Start with a professor's research interest, then filter results by reading their publications.
+                </p>
+                <div class="btnRow" style="margin-top:14px;">
+                  <a class="btn primary" href="#" target="_blank" rel="noreferrer">↗ UNT Research Portal</a>
+                  <a class="btn" href="#" target="_blank" rel="noreferrer">↗ UNT Experts Database</a>
+                </div>
+              </div>
+
+              <div class="card tipBox" style="grid-column:1 / -1;">
+                <div class="listTitle" style="margin:0 0 10px;">📘 Pro Tip</div>
+                <p style="margin:0;color:var(--ro-muted);line-height:1.68;">
+                  When reaching out to professors, mention specific papers they've published and explain why their research interests you. This shows genuine interest and increases your chances of getting a response.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tips Pane -->
+          <div class="pane" id="pane-tips" data-pane="tips">
+            <div class="grid2">
+              <div class="card infoCard">
+                <h3>✅ What gets replies</h3>
+                <p>Personalization + a clear ask. Say what you read, what you’re curious about, and what you want (meeting, lab spot, or advice).</p>
+              </div>
+              <div class="card infoCard">
+                <h3>⏱ Follow-up timing</h3>
+                <p>If you don’t hear back, wait 5–7 days and send a short follow-up with one sentence of new info (a paper you read, updated availability).</p>
+              </div>
+              <div class="card infoCard" style="grid-column:1 / -1;">
+                <h3>🧠 Quick structure</h3>
+                <p>1) Who you are + TAMS. 2) Why their work. 3) One specific question. 4) A clear ask. 5) Availability.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Links Pane -->
+          <div class="pane" id="pane-links" data-pane="links">
+            <div class="grid2">
+              <div class="card infoCard">
+                <h3>🔗 Useful Links</h3>
+                <p>Replace these placeholders with the real links you want on the live site.</p>
+                <div class="btnRow" style="margin-top:14px;">
+                  <a class="btn primary" href="#" target="_blank" rel="noreferrer">↗ RO Facebook Group</a>
+                  <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Judge Sign-Up</a>
+                  <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Volunteer Form</a>
+                </div>
+              </div>
+
+              <div class="card infoCard">
+                <h3>📁 Templates</h3>
+                <p>Poster layout guide, abstract checklist, judging rubric, and research paper format.</p>
+                <div class="btnRow" style="margin-top:14px;">
+                  <a class="btn primary" href="#" target="_blank" rel="noreferrer">↗ Poster Template</a>
+                  <a class="btn" href="#" target="_blank" rel="noreferrer">↗ Abstract Checklist</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footerWrap">
+          <div class="footGrid">
+            <div class="footBrand">
+              <div class="footLogo" aria-hidden="true">🧪</div>
+              <div>
+                <p class="footTitle">TAMS RO</p>
+                <p class="footDesc">Making research accessible for every TAMS student.</p>
+              </div>
+            </div>
+            <div class="footCol">
+              <h4>Quick Links</h4>
+              <a href="#" data-nav="events">Events</a>
+              <a href="#" data-nav="competitions">Competitions</a>
+              <a href="#" data-nav="resources">Resources</a>
+              <a href="#" data-nav="outreach">Volunteer</a>
+            </div>
+            <div class="footCol">
+              <h4>Resources</h4>
+              <a href="#" data-nav="resources">Cold Email Templates</a>
+              <a href="#" data-nav="resources">Finding Research</a>
+              <a href="#" data-nav="resources">How-To Videos</a>
+              <a href="#" data-nav="newsletter">Newsletter</a>
+            </div>
+            <div class="footCol">
+              <h4>Connect With Us</h4>
+              <div class="social">
+                <a class="socBtn" href="#" title="Instagram">⌁</a>
+                <a class="socBtn" href="#" title="Discord">◔</a>
+                <a class="socBtn" href="#" title="Group Chat">👥</a>
+                <a class="socBtn" href="#" title="Email">✉</a>
+              </div>
+              <div style="margin-top:10px; color:#cfe0ff; font-size:13.5px;">
+                📍 Denton, TX<br />
+                ✉ research@yourorg.org
+              </div>
+            </div>
+          </div>
+          <div class="copyright">
+            © 2026 TAMS Research Organization. All rights reserved.<br />
+            Texas Academy of Mathematics and Science at UNT
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ===== OUTREACH ===== -->
+    <section class="page" id="page-outreach" data-page="outreach">
+      <div class="wrap">
+        <div class="hero">
+          <h1 class="pageTitle">Outreach &amp; Volunteering</h1>
+          <div class="underline"></div>
+          <p class="subtitle">Give back to the community by helping younger students discover the joy of research and science.</p>
+        </div>
+
+        <div class="section">
+          <div class="card makeDiff">
+            <div class="makeLeft">
+              <div class="heart" aria-hidden="true">♡</div>
+            </div>
+            <div class="makeRight">
+              <h3>Make a Difference</h3>
+              <p>
+                TAMS Research Organization offers multiple volunteer opportunities throughout the year. Help middle school students conduct their own research and put together a science fair project.
+              </p>
+              <div class="benefits">
+                <div class="benefit"><span class="check">✓</span> Develop leadership and communication skills</div>
+                <div class="benefit"><span class="check">✓</span> Give back to the community</div>
+                <div class="benefit"><span class="check">✓</span> Earn volunteer hours</div>
+                <div class="benefit"><span class="check">✓</span> Network with fellow TAMS students</div>
+                <div class="benefit"><span class="check">✓</span> Build your resume for college applications</div>
+                <div class="benefit"><span class="check">✓</span> Inspire the next generation of scientists</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2>Volunteer Opportunities</h2>
+            <p>Current openings for TAMS students</p>
+          </div>
+
+          <div class="grid3">
+            <div class="card oppCard">
+              <span class="badge badgeBlue">Spots Available</span>
+              <div class="oppTitle">Middle School Science Fair Mentoring</div>
+              <p>Help middle school students conduct their own research and put together a science fair project. Guide them through the scientific method and presentation skills.</p>
+              <div class="smallMeta">
+                <div>🕒 <span>2–3 hours/week</span></div>
+                <div>📍 <span>Local Middle Schools</span></div>
+                <div>📅 <span>September - February</span></div>
+              </div>
+            </div>
+
+            <div class="card oppCard">
+              <span class="badge badgeGold">Limited Spots</span>
+              <div class="oppTitle">ASPIRE Program</div>
+              <p>Work with underrepresented students to introduce them to STEM fields and research opportunities. Help run workshops and mentoring sessions.</p>
+              <div class="smallMeta">
+                <div>🕒 <span>3–4 hours/week</span></div>
+                <div>📍 <span>UNT Campus</span></div>
+                <div>📅 <span>Year-round</span></div>
+              </div>
+            </div>
+
+            <div class="card oppCard">
+              <span class="badge badgeBlue">Spots Available</span>
+              <div class="oppTitle">Science Fair Judge</div>
+              <p>Serve as a judge at local middle school science fairs. Evaluate projects and provide constructive feedback to young scientists.</p>
+              <div class="smallMeta">
+                <div>🕒 <span>One-time event</span></div>
+                <div>📍 <span>Various Schools</span></div>
+                <div>📅 <span>January - March</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="card cta">
+            <div class="ctaIcon" aria-hidden="true">👥</div>
+            <h3>Ready to Volunteer?</h3>
+            <p>Join our ASPIRE volunteering Messenger group to stay updated on opportunities and connect with other volunteers.</p>
+            <div class="btnRow">
+              <a class="btn primary" href="#" target="_blank" rel="noreferrer">↗ Join ASPIRE Messenger</a>
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Sign Up Form →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footerWrap">
+          <div class="footGrid">
+            <div class="footBrand">
+              <div class="footLogo" aria-hidden="true">🧪</div>
+              <div>
+                <p class="footTitle">TAMS RO</p>
+                <p class="footDesc">Making research accessible for every TAMS student.</p>
+              </div>
+            </div>
+            <div class="footCol">
+              <h4>Quick Links</h4>
+              <a href="#" data-nav="events">Events</a>
+              <a href="#" data-nav="competitions">Competitions</a>
+              <a href="#" data-nav="resources">Resources</a>
+              <a href="#" data-nav="outreach">Volunteer</a>
+            </div>
+            <div class="footCol">
+              <h4>Resources</h4>
+              <a href="#" data-nav="resources">Cold Email Templates</a>
+              <a href="#" data-nav="resources">Finding Research</a>
+              <a href="#" data-nav="resources">How-To Videos</a>
+              <a href="#" data-nav="newsletter">Newsletter</a>
+            </div>
+            <div class="footCol">
+              <h4>Connect With Us</h4>
+              <div class="social">
+                <a class="socBtn" href="#" title="Instagram">⌁</a>
+                <a class="socBtn" href="#" title="Discord">◔</a>
+                <a class="socBtn" href="#" title="Group Chat">👥</a>
+                <a class="socBtn" href="#" title="Email">✉</a>
+              </div>
+              <div style="margin-top:10px; color:#cfe0ff; font-size:13.5px;">
+                📍 Denton, TX<br />
+                ✉ research@yourorg.org
+              </div>
+            </div>
+          </div>
+          <div class="copyright">
+            © 2026 TAMS Research Organization. All rights reserved.<br />
+            Texas Academy of Mathematics and Science at UNT
+          </div>
+        </div>
+      </footer>
+    </section>
+
+    <!-- ===== HELP ===== -->
+    <section class="page" id="page-help" data-page="help">
+      <div class="wrap">
+        <div class="hero" style="text-align:left;">
+          <h1 class="pageTitle" style="font-size:34px;display:flex;gap:10px;align-items:center;">
+            <span style="color:var(--ro-gold);">❔</span> Frequently Asked Questions
+          </h1>
+          <p class="subtitle" style="max-width:none;margin:8px 0 0;">Common questions from TAMS students</p>
+        </div>
+
+        <div class="section">
+          <div class="card faqCard">
+            <div class="faqItem">
+              <button class="faqBtn" type="button">
+                How do I find research opportunities as a TAMS student?
+                <span class="chev">▾</span>
+              </button>
+              <div class="faqAns">
+                Start with the Resources tab → Find Research. Use UNT databases, identify 5–10 professors, read one recent paper each, then email with a specific question and a clear ask.
+              </div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="faqItem">
+              <button class="faqBtn" type="button">
+                When should I start looking for research?
+                <span class="chev">▾</span>
+              </button>
+              <div class="faqAns">
+                The earlier the better. Many students start early fall. If you start late, focus on fewer labs, stronger personalization, and faster follow-ups.
+              </div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="faqItem">
+              <button class="faqBtn" type="button">
+                What if a professor doesn’t respond to my email?
+                <span class="chev">▾</span>
+              </button>
+              <div class="faqAns">
+                Follow up in 5–7 days. If no response after 2 follow-ups, move on. The goal is volume + quality: 10 solid emails beats 1 perfect email.
+              </div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="faqItem">
+              <button class="faqBtn" type="button">
+                Can I participate in science fairs without lab research?
+                <span class="chev">▾</span>
+              </button>
+              <div class="faqAns">
+                Yes. Many successful projects are independent. The key is a strong question, careful experimental design, and honest limitations.
+              </div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="faqItem">
+              <button class="faqBtn" type="button">
+                How do I sign up for RO events?
+                <span class="chev">▾</span>
+              </button>
+              <div class="faqAns">
+                Check the Events page and RO announcements. Sign-up forms are usually posted in the RO group chat and website links.
+              </div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="faqItem">
+              <button class="faqBtn" type="button">
+                What is the difference between FWRSEF and TJAS?
+                <span class="chev">▾</span>
+              </button>
+              <div class="faqAns">
+                TJAS is a paper + presentation in early fall. FWRSEF is a regional fair in mid-February with posters/pitches and a pathway to TXSEF/ISEF.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sectionHead">
+            <h2>Quick Links</h2>
+            <p>Jump to what you need</p>
+          </div>
+
+          <div class="quickLinks">
+            <div class="qlCard" data-nav="resources">
+              <div class="qlIcon">🔎</div>
+              <div class="qlTitle">Find Research</div>
+            </div>
+            <div class="qlCard" data-nav="resources">
+              <div class="qlIcon">📄</div>
+              <div class="qlTitle">Email Templates</div>
+            </div>
+            <div class="qlCard" data-nav="competitions">
+              <div class="qlIcon">🏆</div>
+              <div class="qlTitle">Competitions</div>
+            </div>
+            <div class="qlCard" data-nav="events">
+              <div class="qlIcon">📅</div>
+              <div class="qlTitle">Events</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="card cta">
+            <div class="ctaIcon" aria-hidden="true">❓</div>
+            <h3>Still Have Questions?</h3>
+            <p>Reach out to us directly or join our Messenger group to connect with RO executives.</p>
+            <div class="btnRow">
+              <a class="btn primary" href="#" target="_blank" rel="noreferrer">↗ Join Messenger</a>
+              <a class="btn" href="mailto:research@yourorg.org">Email RO →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footerWrap">
+          <div class="footGrid">
+            <div class="footBrand">
+              <div class="footLogo" aria-hidden="true">🧪</div>
+              <div>
+                <p class="footTitle">TAMS RO</p>
+                <p class="footDesc">Making research accessible for every TAMS student.</p>
+              </div>
+            </div>
+            <div class="footCol">
+              <h4>Quick Links</h4>
+              <a href="#" data-nav="events">Events</a>
+              <a href="#" data-nav="competitions">Competitions</a>
+              <a href="#" data-nav="resources">Resources</a>
+              <a href="#" data-nav="outreach">Volunteer</a>
+            </div>
+            <div class="footCol">
+              <h4>Resources</h4>
+              <a href="#" data-nav="resources">Cold Email Templates</a>
+              <a href="#" data-nav="resources">Finding Research</a>
+              <a href="#" data-nav="resources">How-To Videos</a>
+              <a href="#" data-nav="newsletter">Newsletter</a>
+            </div>
+            <div class="footCol">
+              <h4>Connect With Us</h4>
+              <div class="social">
+                <a class="socBtn" href="#" title="Instagram">⌁</a>
+                <a class="socBtn" href="#" title="Discord">◔</a>
+                <a class="socBtn" href="#" title="Group Chat">👥</a>
+                <a class="socBtn" href="#" title="Email">✉</a>
+              </div>
+              <div style="margin-top:10px; color:#cfe0ff; font-size:13.5px;">
+                📍 Denton, TX<br />
+                ✉ research@yourorg.org
+              </div>
+            </div>
+          </div>
+          <div class="copyright">
+            © 2026 TAMS Research Organization. All rights reserved.<br />
+            Texas Academy of Mathematics and Science at UNT
+          </div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // ===== Navigation (single-file "tabs") =====
+    const pages = Array.from(document.querySelectorAll(".page"));
+    const navLinks = Array.from(document.querySelectorAll("[data-nav]"));
+    const desktopLinks = Array.from(document.querySelectorAll(".navlinks a"));
+    const mobileLinks = Array.from(document.querySelectorAll("#mobileMenu a"));
+
+    function setActiveNav(target){
+      desktopLinks.forEach(a => a.classList.toggle("active", a.dataset.nav === target));
+      mobileLinks.forEach(a => a.classList.toggle("active", a.dataset.nav === target));
+    }
+
+    function showPage(target){
+      pages.forEach(p => p.classList.toggle("active", p.dataset.page === target));
+      setActiveNav(target);
+      // close mobile menu
+      const menu = document.getElementById("mobileMenu");
+      const burger = document.getElementById("burger");
+      menu.style.display = "none";
+      burger.setAttribute("aria-expanded","false");
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = link.dataset.nav;
+        showPage(target);
+      });
+    });
+
+    // ===== Burger =====
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    burger.addEventListener("click", () => {
+      const open = mobileMenu.style.display === "block";
+      mobileMenu.style.display = open ? "none" : "block";
+      burger.setAttribute("aria-expanded", open ? "false" : "true");
+    });
+
+    // ===== Resources Tabs =====
+    const tabButtons = Array.from(document.querySelectorAll(".tab"));
+    const panes = Array.from(document.querySelectorAll(".pane"));
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const t = btn.dataset.tab;
+        tabButtons.forEach(b => {
+          const active = b.dataset.tab === t;
+          b.classList.toggle("active", active);
+          b.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        panes.forEach(p => p.classList.toggle("active", p.dataset.pane === t));
+      });
+    });
+
+    // ===== Copy Email Template =====
+    const copyBtn = document.getElementById("copyEmail");
+    if(copyBtn){
+      copyBtn.addEventListener("click", async () => {
+        const text = document.getElementById("emailTemplate").innerText;
+        try{
+          await navigator.clipboard.writeText(text);
+          copyBtn.textContent = "✅ Copied";
+          setTimeout(()=> copyBtn.textContent = "📋 Copy", 1200);
+        }catch(err){
+          copyBtn.textContent = "Copy failed";
+          setTimeout(()=> copyBtn.textContent = "📋 Copy", 1200);
+        }
+      });
+    }
+
+    // ===== FAQ Accordion =====
+    document.querySelectorAll(".faqItem").forEach(item => {
+      const btn = item.querySelector(".faqBtn");
+      btn.addEventListener("click", () => {
+        const open = item.classList.contains("open");
+        // optional: close others
+        document.querySelectorAll(".faqItem").forEach(i => i.classList.remove("open"));
+        if(!open) item.classList.add("open");
+      });
+    });
+
+    // ===== Quick Link Cards on Help =====
+    document.querySelectorAll(".qlCard").forEach(card => {
+      card.addEventListener("click", () => {
+        showPage(card.dataset.nav);
+      });
+    });
+  </script>
+</body>
+</html>
