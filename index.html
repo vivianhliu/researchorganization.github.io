@@ -288,13 +288,25 @@
       .execMeta{margin-top:8px; color: var(--muted); font-size: 13px}
       .execBio{margin-top:12px; color: var(--muted); font-size: 14px; line-height: 1.7}
       .funFact{margin-top:12px; padding-top:12px; border-top:1px solid rgba(15,23,42,.08); color: var(--muted); font-size: 14px}
-      .avatar{
-        width:44px; height:44px; border-radius: 14px;
-        display:grid; place-items:center;
+
+      /* OLD initials avatar (hidden) */
+      .avatar{display:none;}
+
+      /* NEW exec photo */
+      .avatarImgWrap{
+        width:44px;
+        height:44px;
+        border-radius:14px;
+        overflow:hidden;
+        border:1px solid rgba(11,47,122,.14);
         background: rgba(11,47,122,.10);
-        border: 1px solid rgba(11,47,122,.14);
-        color: var(--navy);
-        font-weight: 950;
+        flex: 0 0 auto;
+      }
+      .avatarImg{
+        width:100%;
+        height:100%;
+        object-fit: cover;
+        display:block;
       }
 
       /* Events cards */
@@ -317,6 +329,23 @@
       .eventMeta{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; color: var(--muted); font-size: 13px}
       .metaItem{display:inline-flex; align-items:center; gap:8px}
       .metaDot{width:8px; height:8px; border-radius:999px; background: rgba(11,47,122,.25)}
+
+      /* NEW event photo */
+      .eventPhotoWrap{
+        margin-top:10px;
+        width:100%;
+        height:140px;
+        border-radius: 14px;
+        overflow:hidden;
+        border:1px solid rgba(15,23,42,.10);
+        background: rgba(11,47,122,.06);
+      }
+      .eventPhoto{
+        width:100%;
+        height:100%;
+        object-fit: cover;
+        display:block;
+      }
 
       /* Competition guide */
       .guideItem{
@@ -708,7 +737,11 @@
                   <div class="execName" style="margin-top:10px;">Naren Ganesh</div>
                   <div class="execMeta">Dr. Xiao’s Nonlinear Optics Group • UNT Department of Physics</div>
                 </div>
-                <div class="avatar" aria-hidden="true">NG</div>
+
+                <!-- EXEC PHOTO SLOT -->
+                <div class="avatarImgWrap">
+                  <img class="avatarImg" src="naren.jpg" alt="Naren Ganesh" loading="lazy" />
+                </div>
               </div>
               <div class="execBio">
                 Naren Ganesh is in Dr. Xiao’s nonlinear optics group within the UNT Department of Physics. Naren investigates breakthrough methods for hearing preservation and models thermal radiation in photonic time crystals.
@@ -723,7 +756,11 @@
                   <div class="execName" style="margin-top:10px;">Benjamin Hu</div>
                   <div class="execMeta">Dr. Yong Yang’s Micro- & Nano-Engineering Lab • UNT Department of Biomedical Engineering</div>
                 </div>
-                <div class="avatar" aria-hidden="true">BH</div>
+
+                <!-- EXEC PHOTO SLOT -->
+                <div class="avatarImgWrap">
+                  <img class="avatarImg" src="ben.jpg" alt="Benjamin Hu" loading="lazy" />
+                </div>
               </div>
               <div class="execBio">
                 Benjamin Hu is in Dr. Yong Yang’s Micro- and Nano-engineering lab within the UNT Department of Biomedical Engineering. Ben’s research works on regenerative medicine, with a focus on advancing current stem cell harvesting techniques.
@@ -738,7 +775,11 @@
                   <div class="execName" style="margin-top:10px;">Ryan Kim</div>
                   <div class="execMeta">Dr. Hector Siller Carrillo’s Lab • UNT Department of Mechanical Engineering</div>
                 </div>
-                <div class="avatar" aria-hidden="true">RK</div>
+
+                <!-- EXEC PHOTO SLOT -->
+                <div class="avatarImgWrap">
+                  <img class="avatarImg" src="ryan.jpg" alt="Ryan Kim" loading="lazy" />
+                </div>
               </div>
               <div class="execBio">
                 Ryan Kim is in Dr. Hector Siller Carrillo’s lab within the UNT Department of Mechanical Engineering. Ryan’s research interest lies within additive manufactured stainless steel.
@@ -753,7 +794,11 @@
                   <div class="execName" style="margin-top:10px;">Pavan Ahluwalia</div>
                   <div class="execMeta">Dr. Oliver Chyan’s Lab • UNT Department of Chemistry</div>
                 </div>
-                <div class="avatar" aria-hidden="true">PA</div>
+
+                <!-- EXEC PHOTO SLOT -->
+                <div class="avatarImgWrap">
+                  <img class="avatarImg" src="pavan.jpg" alt="Pavan Ahluwalia" loading="lazy" />
+                </div>
               </div>
               <div class="execBio">
                 Pavan Ahluwalia is in Dr. Oliver Chyan’s lab within the UNT Department of Chemistry. His research focuses on mitigating corrosion in automotive semiconductor devices.
@@ -768,7 +813,11 @@
                   <div class="execName" style="margin-top:10px;">Lakhisha Balaji</div>
                   <div class="execMeta">Dr. Mark Albert’s Lab • UNT Department of Information Science</div>
                 </div>
-                <div class="avatar" aria-hidden="true">LB</div>
+
+                <!-- EXEC PHOTO SLOT -->
+                <div class="avatarImgWrap">
+                  <img class="avatarImg" src="lakhisha.jpg" alt="Lakhisha Balaji" loading="lazy" />
+                </div>
               </div>
               <div class="execBio">
                 Lakhisha Balaji is in Dr. Mark Albert’s lab within the UNT Department of Information Science. Lakhisha’s research lies in building machine learning models to aid early detection of neurodegenerative diseases.
@@ -800,31 +849,67 @@
           </div>
 
           <div class="grid three">
-            <!-- Replace these with real dates/locations -->
+            <!-- UPCOMING: CARD 1 -->
             <div class="card eventCard">
               <div class="badge">Lab Tour</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="lab-tour.jpg" alt="Lab Tour photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">Fall Lab Tour - Chemistry Department</div>
               <div class="eventMeta">
                 <span class="metaItem"><span class="metaDot"></span> October 15, 2024</span>
                 <span class="metaItem"><span class="metaDot"></span> Chemistry Building, Room 204</span>
               </div>
+
+              <!-- OPTIONAL LINKS -->
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn sm" href="https://example.com/signup" target="_blank" rel="noreferrer">Sign Up ↗</a>
+                <a class="btn sm" href="https://example.com/details" target="_blank" rel="noreferrer">Details ↗</a>
+              </div>
             </div>
 
+            <!-- UPCOMING: CARD 2 -->
             <div class="card eventCard">
               <div class="badge">Seminar</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="seminar.jpg" alt="Seminar photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">Research Skills Seminar - Poster Design</div>
               <div class="eventMeta">
                 <span class="metaItem"><span class="metaDot"></span> October 22, 2024</span>
                 <span class="metaItem"><span class="metaDot"></span> McConnell Hall</span>
               </div>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn sm" href="https://example.com/signup" target="_blank" rel="noreferrer">Sign Up ↗</a>
+                <a class="btn sm" href="https://example.com/slides" target="_blank" rel="noreferrer">Slides ↗</a>
+              </div>
             </div>
 
+            <!-- UPCOMING: CARD 3 -->
             <div class="card eventCard">
               <div class="badge">Flagship Event</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="sfr.jpg" alt="Search for Research photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">Search for Research 2024</div>
               <div class="eventMeta">
                 <span class="metaItem"><span class="metaDot"></span> November 5, 2024</span>
                 <span class="metaItem"><span class="metaDot"></span> Gateway Center Ballroom</span>
+              </div>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn sm" href="https://example.com/signup" target="_blank" rel="noreferrer">Sign Up ↗</a>
+                <a class="btn sm" href="https://example.com/prof-list" target="_blank" rel="noreferrer">Professor List ↗</a>
               </div>
             </div>
           </div>
@@ -846,41 +931,93 @@
           <div class="grid three">
             <div class="card eventCard">
               <div class="badge">Early October</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="sfr.jpg" alt="Search for Research photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">Search for Research</div>
               <div class="eventDesc">
                 Search for Research (SFR) is TAMS Research Organization’s annual research networking event. Hosted in early October, SFR aims to connect juniors with UNT professors looking for lab members. Prospective PI’s and students roam around freely at this TableTop networking event, and historically many TAMS students have found meaningful research with the professors they meet! Keynote speakers, previous TAMS students, and faculty all share their experiences in UNT research throughout this event.
+              </div>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn sm" href="https://example.com/sfr-details" target="_blank" rel="noreferrer">Details ↗</a>
+                <a class="btn sm" href="https://example.com/sfr-signup" target="_blank" rel="noreferrer">Sign Up ↗</a>
               </div>
             </div>
 
             <div class="card eventCard">
               <div class="badge">Before FWRSEF</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="tams-fair.jpeg" alt="TAMS Fair photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">TAMS Fair</div>
               <div class="eventDesc">
                 TAMS Fair occurs annually to prepare students before the Fort Worth Regional Science and Engineering Fair. Falling about a week before the fair, TAMS students present their science fair poster in a professional environment with UNT professors as judges. Students are able to practice their presentation and receive timely feedback from professors and RO executives.
+              </div>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn sm" href="https://example.com/tams-fair-details" target="_blank" rel="noreferrer">Details ↗</a>
+                <a class="btn sm" href="https://example.com/tams-fair-signup" target="_blank" rel="noreferrer">Sign Up ↗</a>
               </div>
             </div>
 
             <div class="card eventCard">
               <div class="badge">Throughout Year</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="seminar.jpg" alt="Research Skills Seminar photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">Research Skills Seminar</div>
               <div class="eventDesc">
                 In addition to TAMS Fair, Research Organization hosts personalized Research Skills Seminars. These seminars are a way for students to prepare for various research competitions throughout the year like FWRSEF, TJAS, and ISEF. The information sessions are less professional than TAMS Fair and give students immediate feedback on their projects. Research Skills Seminars occur throughout the academic year, and sign ups will be available on RO’s website or Facebook group.
+              </div>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn sm" href="https://example.com/seminars" target="_blank" rel="noreferrer">Schedule ↗</a>
               </div>
             </div>
 
             <div class="card eventCard">
               <div class="badge">Monthly</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="lab-trips.jpeg" alt="Lab Trips photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">Laboratory Trips</div>
               <div class="eventDesc">
                 TAMS Research Organization works to expose students to all fields of research through monthly lab tours. RO organizes guided tours of UNT labs where professors explain their cutting edge research to students. Tour groups are able to meet undergraduates, PhD candidates, and post-doctoral researchers involved in the facility and gain insight into the work of that particular lab. Students are shown past and current research, then are able to ask the professor questions.
+              </div>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn sm" href="https://example.com/lab-trip" target="_blank" rel="noreferrer">Upcoming Tours ↗</a>
               </div>
             </div>
 
             <div class="card eventCard">
               <div class="badge">Summer (Late July)</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="research.jpeg" alt="reSEARCH Sessions photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">reSEARCH Sessions</div>
               <div class="eventDesc">
                 Over the summer, TAMS Research Organization offers online information sessions for incoming juniors. These one-on-one meetings with an RO exec give new TAMS students the chance to ask questions about contacting professors and research in general. The sign-ups and Zoom link will be sent out to the incoming class’s Facebook messenger in late July.
+              </div>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn sm" href="https://example.com/research-sessions" target="_blank" rel="noreferrer">Sign Up ↗</a>
               </div>
             </div>
           </div>
@@ -921,13 +1058,15 @@
             <h3>Upcoming Deadlines</h3>
           </div>
 
-          <!-- Replace these dates with your current year -->
           <div class="grid three">
             <div class="card eventCard" style="border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.06);">
               <div class="badge" style="background: rgba(239,68,68,.16); border-color: rgba(239,68,68,.30); color:#7a1c1c;">TJAS</div>
               <div class="eventTitle" style="margin-top:10px;">Abstract Submission</div>
               <div class="eventMeta">
                 <span class="metaItem"><span class="metaDot" style="background: rgba(239,68,68,.45)"></span> September 15, 2024</span>
+              </div>
+              <div style="margin-top:12px;">
+                <a class="btn sm" href="https://artscioutreach.tamu.edu/tjas-event-guidelines" target="_blank" rel="noreferrer">Guidelines ↗</a>
               </div>
             </div>
 
@@ -937,6 +1076,9 @@
               <div class="eventMeta">
                 <span class="metaItem"><span class="metaDot"></span> January 10, 2025</span>
               </div>
+              <div style="margin-top:12px;">
+                <a class="btn sm" href="https://fwrsef.org/" target="_blank" rel="noreferrer">Official Website ↗</a>
+              </div>
             </div>
 
             <div class="card eventCard">
@@ -944,6 +1086,9 @@
               <div class="eventTitle" style="margin-top:10px;">Paper Submission</div>
               <div class="eventMeta">
                 <span class="metaItem"><span class="metaDot"></span> February 1, 2025</span>
+              </div>
+              <div style="margin-top:12px;">
+                <a class="btn sm" href="https://fwrsef.org/" target="_blank" rel="noreferrer">Submission Info ↗</a>
               </div>
             </div>
           </div>
@@ -1120,46 +1265,46 @@
                   <path d="M7 15h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
               </div>
-              <div class="smallMuted">October 2024</div>
+              <div class="smallMuted">February 2026</div>
             </div>
             <div class="issueRight">
-              <h3>October 2024 Issue</h3>
+              <h3>February 2026 Issue</h3>
               <p>
-                The TAMS Research Organization writes a monthly STEM newsletter with articles by executives and students. The newsletter focuses on new developments in research, recent accomplishments by TAMS students, and Research Organization’s monthly events.
+                Latest updates on TAMS Fair, FWRSEF results, valograms, and RO announcements. Replace the links below with your real newsletter URLs.
               </p>
               <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-                <a class="btn primary sm" href="#" onclick="demoLink(event)">Read Online</a>
-                <a class="btn sm" href="#" onclick="demoLink(event)">Download PDF</a>
+                <!-- REPLACE href with your real link -->
+                <a class="btn primary sm" href="https://www.canva.com/design/DAHCYuHznrc/qVIcxTpkxZ_7rU89v_PBtg/edit?utm_content=DAHCYuHznrc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" rel="noreferrer">Read Online ↗</a>
+                <a class="btn sm" href="STEM Newsletter Draft.pdf" target="_blank" rel="noreferrer" download>Download PDF ↗</a>
               </div>
-              <div class="smallMuted" style="margin-top:10px;">Replace these buttons with your real newsletter links.</div>
             </div>
           </div>
 
           <div style="height:22px"></div>
 
           <div style="font-weight:950; font-size:18px;">Newsletter Archive</div>
-          <div class="smallMuted" style="margin-top:6px;">Browse our previous issues</div>
+          <div class="smallMuted" style="margin-top:6px;">Browse previous issues</div>
 
           <div class="grid three" style="margin-top:14px;">
             <div class="card eventCard">
-              <div class="eventTitle">September 2024 Issue</div>
-              <div class="eventDesc">Back to school edition! Tips for finding research as a junior, intro to RO exec board, upcoming lab tours.</div>
+              <div class="eventTitle">January 2026 Issue</div>
+              <div class="eventDesc">Replace this blurb + link.</div>
               <div style="margin-top:12px;">
-                <a class="btn sm" href="#" onclick="demoLink(event)">Read Issue</a>
+                <a class="btn sm" href="https://example.com/newsletter/jan-2026" target="_blank" rel="noreferrer">Read Issue ↗</a>
               </div>
             </div>
             <div class="card eventCard">
-              <div class="eventTitle">Summer 2024 Special</div>
-              <div class="eventDesc">Summer research opportunities, REU programs recap, advice from seniors heading to top universities.</div>
+              <div class="eventTitle">December 2025 Issue</div>
+              <div class="eventDesc">Replace this blurb + link.</div>
               <div style="margin-top:12px;">
-                <a class="btn sm" href="#" onclick="demoLink(event)">Read Issue</a>
+                <a class="btn sm" href="https://example.com/newsletter/dec-2025" target="_blank" rel="noreferrer">Read Issue ↗</a>
               </div>
             </div>
             <div class="card eventCard">
-              <div class="eventTitle">May 2024 Issue</div>
-              <div class="eventDesc">End of year celebrations, research achievements of the graduating class, and more.</div>
+              <div class="eventTitle">November 2025 Issue</div>
+              <div class="eventDesc">Replace this blurb + link.</div>
               <div style="margin-top:12px;">
-                <a class="btn sm" href="#" onclick="demoLink(event)">Read Issue</a>
+                <a class="btn sm" href="https://example.com/newsletter/nov-2025" target="_blank" rel="noreferrer">Read Issue ↗</a>
               </div>
             </div>
           </div>
@@ -1217,7 +1362,6 @@ Best regards,
 [Your Name]
 TAMS Class of [Year]
 [Your Email]</div>
-                <div class="smallMuted" style="margin-top:10px;">Template? To be written (edit as needed).</div>
               </div>
             </div>
           </div>
@@ -1228,21 +1372,21 @@ TAMS Class of [Year]
               <div class="card" style="padding:16px;">
                 <div style="font-weight:950;">How to Find Meaningful Research</div>
                 <div class="smallMuted" style="margin-top:8px;">
-                  Review this helpful video by Dr. James Duban, the Associate Dean for Research and National Scholarships.
+                  Replace this link with your actual video link.
                 </div>
                 <div style="margin-top:12px;">
-                  <a class="btn sm" href="#" onclick="demoLink(event)">Watch: Locating a Research Mentor at UNT</a>
+                  <a class="btn sm" href="https://example.com/video" target="_blank" rel="noreferrer">Watch: Locating a Research Mentor at UNT ↗</a>
                 </div>
               </div>
 
               <div class="card" style="padding:16px;">
                 <div style="font-weight:950;">UNT Research Database</div>
                 <div class="smallMuted" style="margin-top:8px;">
-                  The TAMS Research Organization suggests looking by keyword in the UNT database. Search by a professor’s research interest, and then filter through the results by reading their publications.
+                  Search by keyword, then filter results by reading publications.
                 </div>
                 <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-                  <a class="btn primary sm" href="#" onclick="demoLink(event)">UNT Research Portal</a>
-                  <a class="btn sm" href="#" onclick="demoLink(event)">UNT Experts Database</a>
+                  <a class="btn primary sm" href="https://example.com/unt-portal" target="_blank" rel="noreferrer">UNT Research Portal ↗</a>
+                  <a class="btn sm" href="https://example.com/unt-experts" target="_blank" rel="noreferrer">UNT Experts Database ↗</a>
                 </div>
               </div>
             </div>
@@ -1253,7 +1397,7 @@ TAMS Class of [Year]
             <div class="card" style="padding:16px;">
               <div style="font-weight:950;">Pro Tip</div>
               <div class="smallMuted" style="margin-top:8px;">
-                When reaching out to professors, mention specific papers they’ve published and explain why their research interests you. This shows genuine interest and increases your chances of getting a response.
+                Mention a specific paper and one concrete question. Short + specific gets replies.
               </div>
             </div>
           </div>
@@ -1268,6 +1412,7 @@ TAMS Class of [Year]
                 <a href="#newsletter">→ Newsletter</a>
                 <a href="#outreach">→ Outreach</a>
                 <a href="#help">→ Help</a>
+                <a href="mailto:tamsresearchorg@unt.edu?subject=RO%20Question">→ Email RO</a>
               </div>
             </div>
           </div>
@@ -1305,6 +1450,12 @@ TAMS Class of [Year]
           <div class="grid three" style="margin-top:14px;">
             <div class="card eventCard">
               <div class="badge" style="background: rgba(11,47,122,.10); border-color: rgba(11,47,122,.20); color:var(--navy);">Spots Available</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="mentoring.jpeg" alt="Middle school mentoring photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">Middle School Science Fair Mentoring</div>
               <div class="eventDesc">Help middle school students conduct their own research and put together a science fair project. Guide them through the scientific method and presentation skills.</div>
               <div class="eventMeta">
@@ -1312,10 +1463,20 @@ TAMS Class of [Year]
                 <span class="metaItem"><span class="metaDot"></span> Local middle schools</span>
                 <span class="metaItem"><span class="metaDot"></span> Sept–Feb</span>
               </div>
+
+              <div style="margin-top:12px;">
+                <a class="btn sm" href="https://example.com/mentor-signup" target="_blank" rel="noreferrer">Sign Up ↗</a>
+              </div>
             </div>
 
             <div class="card eventCard">
               <div class="badge">Limited Spots</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="aspire.jpg" alt="ASPIRE volunteering photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">ASPIRE Program</div>
               <div class="eventDesc">Work with underrepresented students to introduce them to STEM fields and research opportunities. Help run workshops and mentoring sessions.</div>
               <div class="eventMeta">
@@ -1323,16 +1484,30 @@ TAMS Class of [Year]
                 <span class="metaItem"><span class="metaDot"></span> UNT campus</span>
                 <span class="metaItem"><span class="metaDot"></span> Year-round</span>
               </div>
+
+              <div style="margin-top:12px;">
+                <a class="btn sm" href="https://example.com/aspire-info" target="_blank" rel="noreferrer">Info ↗</a>
+              </div>
             </div>
 
             <div class="card eventCard">
               <div class="badge" style="background: rgba(11,47,122,.10); border-color: rgba(11,47,122,.20); color:var(--navy);">Spots Available</div>
+
+              <!-- EVENT PHOTO SLOT -->
+              <div class="eventPhotoWrap">
+                <img class="eventPhoto" src="judge.jpg" alt="Science fair judging photo" loading="lazy" />
+              </div>
+
               <div class="eventTitle" style="margin-top:10px;">Science Fair Judge</div>
               <div class="eventDesc">Serve as a judge at local middle school science fairs. Evaluate projects and provide constructive feedback to young scientists.</div>
               <div class="eventMeta">
                 <span class="metaItem"><span class="metaDot"></span> One-time event</span>
                 <span class="metaItem"><span class="metaDot"></span> Various schools</span>
                 <span class="metaItem"><span class="metaDot"></span> Jan–Mar</span>
+              </div>
+
+              <div style="margin-top:12px;">
+                <a class="btn sm" href="https://example.com/judge-signup" target="_blank" rel="noreferrer">Sign Up ↗</a>
               </div>
             </div>
           </div>
@@ -1341,10 +1516,10 @@ TAMS Class of [Year]
 
           <div class="card" style="padding:16px; text-align:center;">
             <div style="font-weight:950;">Ready to Volunteer?</div>
-            <div class="smallMuted" style="margin-top:8px;">Join our ASPIRE volunteering Messenger group to stay updated on opportunities and connect with other volunteers.</div>
+            <div class="smallMuted" style="margin-top:8px;">Replace these links with your real Messenger + sign up form URLs.</div>
             <div style="margin-top:12px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-              <a class="btn primary sm" href="#" onclick="demoLink(event)">Join ASPIRE Messenger</a>
-              <a class="btn sm" href="#" onclick="demoLink(event)">Sign Up Form →</a>
+              <a class="btn primary sm" href="https://example.com/aspire-messenger" target="_blank" rel="noreferrer">Join ASPIRE Messenger ↗</a>
+              <a class="btn sm" href="https://example.com/volunteer-form" target="_blank" rel="noreferrer">Sign Up Form ↗</a>
             </div>
           </div>
         </div>
@@ -1410,10 +1585,10 @@ TAMS Class of [Year]
 
           <div class="card" style="padding:16px; text-align:center;">
             <div style="font-weight:950;">Still Have Questions?</div>
-            <div class="smallMuted" style="margin-top:8px;">Reach out to us directly or join our Messenger group to connect with RO executives.</div>
+            <div class="smallMuted" style="margin-top:8px;">Reach out directly.</div>
             <div style="margin-top:12px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-              <a class="btn primary sm" href="mailto:tamsresearchorg@unt.edu">Email RO</a>
-              <a class="btn sm" href="#" onclick="demoLink(event)">Join Messenger GC</a>
+              <a class="btn primary sm" href="mailto:tamsresearchorg@unt.edu?subject=RO%20Question">Email RO</a>
+              <a class="btn sm" href="https://example.com/messenger" target="_blank" rel="noreferrer">Join Messenger GC ↗</a>
             </div>
           </div>
         </div>
@@ -1452,20 +1627,20 @@ TAMS Class of [Year]
           <div>
             <div class="footTitle">Connect With Us</div>
             <div class="socialRow" aria-label="Social links">
-              <a class="socialBtn" href="#" onclick="demoLink(event)" aria-label="Instagram">
+              <a class="socialBtn" href="https://example.com/instagram" target="_blank" rel="noreferrer" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z" stroke="currentColor" stroke-width="2"/>
                   <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/>
                   <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
                 </svg>
               </a>
-              <a class="socialBtn" href="#" onclick="demoLink(event)" aria-label="Messenger">
+              <a class="socialBtn" href="https://example.com/messenger" target="_blank" rel="noreferrer" aria-label="Messenger">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path d="M12 3C6.5 3 2 7 2 12c0 2.9 1.5 5.4 3.9 7.1V21l3-1.6c1 .3 2 .5 3.1.5 5.5 0 10-4 10-9s-4.5-9-10-9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                   <path d="M7 14l4-4 3 3 3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
-              <a class="socialBtn" href="#" onclick="demoLink(event)" aria-label="Email">
+              <a class="socialBtn" href="mailto:tamsresearchorg@unt.edu" aria-label="Email">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                   <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
@@ -1474,8 +1649,8 @@ TAMS Class of [Year]
             </div>
 
             <div style="margin-top:12px; display:grid; gap:8px;">
-              <div style="color: rgba(255,255,255,.82); font-size: 13px;">📬 Main Messenger GC</div>
-              <div style="color: rgba(255,255,255,.82); font-size: 13px;">🤝 ASPIRE Volunteering GC</div>
+              <a style="color: rgba(255,255,255,.82); font-size: 13px;" href="https://example.com/main-messenger" target="_blank" rel="noreferrer">📬 Main Messenger GC ↗</a>
+              <a style="color: rgba(255,255,255,.82); font-size: 13px;" href="https://example.com/aspire-messenger" target="_blank" rel="noreferrer">🤝 ASPIRE Volunteering GC ↗</a>
               <a style="color: rgba(255,255,255,.82); font-size: 13px;" href="mailto:tamsresearchorg@unt.edu">✉️ tamsresearchorg@unt.edu</a>
             </div>
           </div>
@@ -1491,7 +1666,7 @@ TAMS Class of [Year]
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
-      // ====== Helpers ======
+      // ====== Toast ======
       function toast(msg){
         const t = document.getElementById("toast");
         t.textContent = msg;
@@ -1500,12 +1675,7 @@ TAMS Class of [Year]
         window.__toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
       }
 
-      function demoLink(e){
-        e.preventDefault();
-        toast("Replace this placeholder (#) with your real link.");
-      }
-      window.demoLink = demoLink;
-
+      // ====== Copy template ======
       function copyTemplate(){
         const el = document.getElementById("emailTemplate");
         const text = el.textContent || "";
@@ -1530,13 +1700,10 @@ TAMS Class of [Year]
       function parseHash(){
         const h = (location.hash || "#home").replace("#", "").trim();
         if (!h) return "home";
-        // allow linking to sections by treating unknown as home
         return pages.includes(h) ? h : "home";
       }
 
       window.addEventListener("hashchange", () => showPage(parseHash()));
-
-      // default
       showPage(parseHash());
 
       // ====== Mobile menu ======
